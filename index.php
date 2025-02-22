@@ -12,6 +12,7 @@
 </head>
 
 <body>
+        <!--Navbar section -->
     <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container-fluid">
             <a class="navbar-brand me-5" href="#">INFOZEN Technologies</a>
@@ -40,7 +41,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item ms-5">
                     <a href = "loginpage.php"><button type="button" class="btn btn-secondary">Login</button></a>
                     </li>
                 </ul>
@@ -48,6 +49,7 @@
         </div>
     </nav>
 
+    <!--Carousel section -->
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -120,63 +122,9 @@
             </div>
         </div>
 
-        <div class="row text-center">
-            <div class="col-md-4 mb-5 mb-md-0">
-                <div class="card testimonial-card">
-                    <div class="card-up" style="background-color: #9d789b;"></div>
-                    <div class="avatar mx-auto bg-white">
-                        <img src="assests/person1.jpg"
-                            class="rounded-circle img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <h4 class="mb-4">Maria Smantha</h4>
-                        <hr />
-                        <p class="dark-grey-text mt-4">
-                            <i class="fas fa-quote-left pe-2"></i>
-                            The team at Infozen has been incredible.
-                            Their expertise and dedication helped us streamline our IT infrastructure,
-                            improving efficiency and security. Highly recommended!
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-5 mb-md-0">
-                <div class="card testimonial-card">
-                    <div class="card-up" style="background-color: #7a81a8;"></div>
-                    <div class="avatar mx-auto bg-white">
-                        <img src="assests/person3.jpg"
-                            class="rounded-circle img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <h4 class="mb-4">Lisa Cudrow</h4>
-                        <hr />
-                        <p class="dark-grey-text mt-4">
-                            <i class="fas fa-quote-left pe-2"></i>
-                            The customer support team is always available and ready to assist.
-                            Whether it's troubleshooting issues or providing IT guidance.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-0">
-                <div class="card testimonial-card">
-                    <div class="card-up" style="background-color: #6d5b98;"></div>
-                    <div class="avatar mx-auto bg-white">
-                        <img src="assests/person2.jpg"
-                            class="rounded-circle img-fluid" />
-                    </div>
-                    <div class="card-body">
-                        <h4 class="mb-4">John Smith</h4>
-                        <hr />
-                        <p class="dark-grey-text mt-4">
-                            <i class="fas fa-quote-left pe-2"></i>
-                            Thanks to Infozen, our company has embraced digital transformation with ease.
-                            Their cloud solutions and cybersecurity measures have provided us
-                            scalability
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="row text-center ms-3 me-3">
+            <?php include("testi_cards_fetch.php"); ?>
+           
         </div>
     </section>
 
@@ -196,6 +144,9 @@
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Message</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="container">
+        <a href="#" class="btn btn-primary">Submit</a>
         </div>
     </div>
 

@@ -15,9 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST["service_title"])) {
         $title = $_POST["service_title"];
         $sql = "UPDATE services_title SET service_title = '$title'";
-    } 
-
-    else if (
+    } else if (
         !empty($_POST["card_title"]) && !empty($_POST["card_description"]) && !empty($_POST["card_image"]) &&
         !empty($_POST["button_text"]) && !empty($_POST["button_link"])
     ) {
@@ -29,26 +27,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "INSERT INTO service_cards (title,description,image_path,button_text,button_link) 
                  VALUES ('$title','$description','$image','$btn_txt','$btn_lk')";
-    } 
-    
-    else if (!empty($_POST["delete_card_title"])) {
+    } else if (!empty($_POST["delete_card_title"])) {
         $card_title = $_POST["delete_card_title"];
         $sql = "DELETE FROM service_cards WHERE title = '$card_title'";
-    }
-
-    else if (
-        !empty($_POST["fcard_title"]) && !empty($_POST["fcard_description"]) && !empty($_POST["fcard_image"])) {
+    } else if (
+        !empty($_POST["fcard_title"]) && !empty($_POST["fcard_description"]) && !empty($_POST["fcard_image"])
+    ) {
         $title = $_POST["fcard_title"];
         $description = $_POST["fcard_description"];
         $image = $_POST["fcard_image"];
 
         $sql = "INSERT INTO feature_cards2 (title,description,image_path) VALUES ('$title','$description','$image')";
     } 
-
+    
     else if (!empty($_POST["feature_title"])) {
         $title = $_POST["feature_title"];
         $sql = "UPDATE feature_title SET feature_title = '$title'";
     } 
+    
+    else if (!empty($_POST["fdelete_card_title"])) {
+        $card_title = $_POST["fdelete_card_title"];
+        $sql = "DELETE FROM feature_cards2 WHERE title = '$card_title'";
+    }
+
+    else if (
+        !empty($_POST["tcard_title"]) && !empty($_POST["feedbck"]) && !empty($_POST["fbd_image"])
+    ) {
+        $name = $_POST["tcard_title"];
+        $fbd = $_POST["feedbck"];
+        $image = $_POST["fbd_image"];
+
+        $sql = "INSERT INTO testimonials_cards (Name,feedback,image_path) VALUES ('$name','$fbd','$image')";
+    } 
+    
+
 
 
     if (!empty($sql)) {
@@ -98,39 +110,149 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </nav>
 
-    <div class="container d-flex flex-wrap my-5 justify-content-center">
+    <!--Tabs section -->
+    <div class="container d-flex flex-wrap justify-content-center my-3">
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="#service"> <button type="button" class="btn btn-primary mx-2">Service section</button></a>
+            <a href="#feature"> <button type="button" class="btn btn-primary mx-2">Feature section</button></a>
+            <a href="#testimonials"> <button type="button" class="btn btn-primary mx-2">Testimonial section</button></a>
+        </div>
+    </div>
+
+
+    <!--Service section starts from here -->
+    <div id="service" class="container d-flex flex-wrap my-5 justify-content-center">
         <div class="card" style="width: 50rem;">
             <div class="card-body shadow-sm p-3">
-                <h5 class="card-title custom-font-color-blue">Change services title</h5>
-                <label for="exampleFormControlTextarea1" class="form-label">Enter new title</label>
-                <form action="adminpanel.php" method="post">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="service_title"
-                        rows="2"></textarea>
-                    <button type="submit" class="btn btn-primary my-3">Change title</button>
-                </form>
+                <h2 class="custom-font-color-blue">Service Section</h2>
+                <div class="container d-flex flex-wrap my-5 justify-content-center">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body shadow-sm p-3">
+                            <h5 class="card-title custom-font-color-blue">Change services title</h5>
+                            <label for="exampleFormControlTextarea1" class="form-label">Enter new title</label>
+                            <form action="adminpanel.php" method="post">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="service_title"
+                                    rows="2"></textarea>
+                                <button type="submit" class="btn btn-primary my-3">Change title</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex flex-wrap my-5 justify-content-center">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body shadow-sm p-3">
+                            <h5 class="card-title custom-font-color-blue">Add a Service card</h5>
+                            <label for="exampleFormControlTextarea1" class="form-label">Title</label>
+                            <form action="adminpanel.php" method="post">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="card_title"
+                                    rows="1"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="card_description"
+                                    rows="2"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Image path</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="card_image"
+                                    rows="1"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Button text</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="button_text"
+                                    rows="1"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Button link</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="button_link"
+                                    rows="1"></textarea>
+                                <button type="submit" class="btn btn-primary my-3">Add Card</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex flex-wrap my-5 justify-content-center">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body shadow-sm p-3">
+                            <h5 class="card-title text-danger">Delete Service Card</h5>
+                            <label for="exampleFormControlTextarea1" class="form-label">Enter Card title</label>
+                            <form action="adminpanel.php" method="post">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="delete_card_title"
+                                    rows="2"></textarea>
+                                <button type="submit" class="btn btn-danger my-3">Delete Card</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container d-flex flex-wrap my-5 justify-content-center">
+
+    <!--Feature section starts from here -->
+    <div id="feature" class="container d-flex flex-wrap my-5 justify-content-center">
         <div class="card" style="width: 50rem;">
             <div class="card-body shadow-sm p-3">
-                <h5 class="card-title custom-font-color-blue">Add a Service card</h5>
-                <label for="exampleFormControlTextarea1" class="form-label">Title</label>
+                <h2 class="custom-font-color-blue">Feature Section</h2>
+                <div class="container d-flex flex-wrap my-5 justify-content-center">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body shadow-sm p-3">
+                            <h5 class="card-title custom-font-color-blue">Change Features title</h5>
+                            <label for="exampleFormControlTextarea1" class="form-label">Enter new title</label>
+                            <form action="adminpanel.php" method="post">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="feature_title"
+                                    rows="2"></textarea>
+                                <button type="submit" class="btn btn-primary my-3">Change title</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex flex-wrap my-5 justify-content-center">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body shadow-sm p-3">
+                            <h5 class="card-title custom-font-color-blue">Add a Feature card</h5>
+                            <label for="exampleFormControlTextarea1" class="form-label">Title</label>
+                            <form action="adminpanel.php" method="post">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="fcard_title"
+                                    rows="1"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="fcard_description"
+                                    rows="2"></textarea>
+                                <label for="exampleFormControlTextarea1" class="form-label">Image path</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" name="fcard_image"
+                                    rows="1"></textarea>
+                                <button type="submit" class="btn btn-primary my-3">Add Card</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex flex-wrap my-5 justify-content-center">
+                    <div class="card" style="width: 50rem;">
+                        <div class="card-body shadow-sm p-3">
+                            <h5 class="card-title text-danger">Delete Feature Card</h5>
+                            <label for="exampleFormControlTextarea1" class="form-label">Enter Card title</label>
+                            <form action="adminpanel.php" method="post">
+                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                    name="fdelete_card_title" rows="2"></textarea>
+                                <button type="submit" class="btn btn-danger my-3">Delete Card</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Testimonials section starts from here -->
+    <div id="testimonials" class="container d-flex flex-wrap my-5 justify-content-center">
+        <div class="card" style="width: 50rem;">
+            <div class="card-body shadow-sm p-3">
+                <h5 class="card-title custom-font-color-blue">Add a Testimonial card</h5>
+                <label for="exampleFormControlTextarea1" class="form-label">Name</label>
                 <form action="adminpanel.php" method="post">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="card_title"
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="tcard_title"
                         rows="1"></textarea>
-                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="card_description"
-                        rows="2"></textarea>
+                    <label for="exampleFormControlTextarea1" class="form-label">feedback</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="feedbck" rows="2"></textarea>
                     <label for="exampleFormControlTextarea1" class="form-label">Image path</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="card_image"
-                        rows="1"></textarea>
-                    <label for="exampleFormControlTextarea1" class="form-label">Button text</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="button_text"
-                        rows="1"></textarea>
-                    <label for="exampleFormControlTextarea1" class="form-label">Button link</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="button_link"
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="fbd_image"
                         rows="1"></textarea>
                     <button type="submit" class="btn btn-primary my-3">Add Card</button>
                 </form>
@@ -138,52 +260,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <div class="container d-flex flex-wrap my-5 justify-content-center">
-        <div class="card" style="width: 50rem;">
-            <div class="card-body shadow-sm p-3">
-                <h5 class="card-title text-danger">Delete Service Card</h5>
-                <label for="exampleFormControlTextarea1" class="form-label">Enter Card title</label>
-                <form action="adminpanel.php" method="post">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="delete_card_title"
-                        rows="2"></textarea>
-                    <button type="submit" class="btn btn-danger my-3">Delete Card</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<!--Tabs section -->
+    <div class="container d-flex flex-wrap justify-content-center my-3">
 
-    <div class="container d-flex flex-wrap my-5 justify-content-center">
-        <div class="card" style="width: 50rem;">
-            <div class="card-body shadow-sm p-3">
-                <h5 class="card-title custom-font-color-blue">Change Features title</h5>
-                <label for="exampleFormControlTextarea1" class="form-label">Enter new title</label>
-                <form action="adminpanel.php" method="post">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="feature_title"
-                        rows="2"></textarea>
-                    <button type="submit" class="btn btn-primary my-3">Change title</button>
-                </form>
-            </div>
-        </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="#service"> <button type="button" class="btn btn-primary mx-2">Service section</button></a>
+        <a href="#feature"> <button type="button" class="btn btn-primary mx-2">Feature section</button></a>
+        <a href="#testimonials"> <button type="button" class="btn btn-primary mx-2">Testimonial section</button></a>
     </div>
-
-    <div class="container d-flex flex-wrap my-5 justify-content-center">
-        <div class="card" style="width: 50rem;">
-            <div class="card-body shadow-sm p-3">
-                <h5 class="card-title custom-font-color-blue">Add a Feature card</h5>
-                <label for="exampleFormControlTextarea1" class="form-label">Title</label>
-                <form action="adminpanel.php" method="post">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="fcard_title"
-                        rows="1"></textarea>
-                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="fcard_description"
-                        rows="2"></textarea>
-                    <label for="exampleFormControlTextarea1" class="form-label">Image path</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="fcard_image"
-                        rows="1"></textarea>
-                    <button type="submit" class="btn btn-primary my-3">Add Card</button>
-                </form>
-            </div>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
