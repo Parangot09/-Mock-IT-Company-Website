@@ -7,7 +7,8 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    foreach ($rows as $row) {
+    foreach ($rows as $row) 
+    {
 
         echo '<div class="card fade-in" style="width: 18rem;">
             <img src="' . $row["image_path"] . '" class="card-img-top" alt="...">
